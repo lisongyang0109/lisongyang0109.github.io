@@ -7,17 +7,17 @@
   
   <title>mszj | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Simple interview questions">
+  <meta name="description" content="简单的一些linux面试题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mszj">
 <meta property="og:url" content="http://yoursite.com/2019/08/26/mszj/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Simple interview questions">
+<meta property="og:description" content="简单的一些linux面试题">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-26T09:23:32.356Z">
+<meta property="og:updated_time" content="2019-08-26T09:26:49.253Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mszj">
-<meta name="twitter:description" content="Simple interview questions">
+<meta name="twitter:description" content="简单的一些linux面试题">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -87,7 +87,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <!--[TOC]-->
-<h2 id="Simple-interview-questions"><a href="#Simple-interview-questions" class="headerlink" title="Simple interview questions"></a>Simple interview questions</h2><a id="more"></a>
+<h2 id="简单的一些linux面试题"><a href="#简单的一些linux面试题" class="headerlink" title="简单的一些linux面试题"></a>简单的一些linux面试题</h2><a id="more"></a>
+
 <h4 id="1-MySQL主从同步原理说明，查询主从同步的命令"><a href="#1-MySQL主从同步原理说明，查询主从同步的命令" class="headerlink" title="1. MySQL主从同步原理说明，查询主从同步的命令"></a>1. MySQL主从同步原理说明，查询主从同步的命令</h4><ul>
 <li><p>开启binlog后，主库会生成一个 log dump 线程，用来给从库I/O线程传binlog;</p>
 </li>
@@ -101,14 +102,15 @@
 </li>
 </ul>
 <h4 id="2-主从同步的方式有哪些"><a href="#2-主从同步的方式有哪些" class="headerlink" title="2. 主从同步的方式有哪些"></a>2. 主从同步的方式有哪些</h4><h4 id="3-查看8080端口是否打开的是哪个服务"><a href="#3-查看8080端口是否打开的是哪个服务" class="headerlink" title="3. 查看8080端口是否打开的是哪个服务"></a>3. 查看8080端口是否打开的是哪个服务</h4><ul>
-<li><strong><em>ss -luntp|grep  8080</em></strong><h4 id="4-开发要查看tomcat的日志，但是太大了，不能用vim的方式，你怎么办"><a href="#4-开发要查看tomcat的日志，但是太大了，不能用vim的方式，你怎么办" class="headerlink" title="4. 开发要查看tomcat的日志，但是太大了，不能用vim的方式，你怎么办"></a>4. 开发要查看tomcat的日志，但是太大了，不能用vim的方式，你怎么办</h4><ul>
-<li>问开发所需要日志的具体时间范围</li>
-<li>通过sed取出日志并追加进新的文件，这样就能看到具体某时间段的日志sed -n ‘/2019-08-26 13:35:/,/2019-08-26 14:10:/p’ catalina.out &gt; 01.txt</li>
+<li><strong><em>ss -luntp|grep  8080</em></strong></li>
 </ul>
+<h4 id="4-开发要查看tomcat的日志，但是太大了，不能用vim的方式，你怎么办"><a href="#4-开发要查看tomcat的日志，但是太大了，不能用vim的方式，你怎么办" class="headerlink" title="4. 开发要查看tomcat的日志，但是太大了，不能用vim的方式，你怎么办"></a>4. 开发要查看tomcat的日志，但是太大了，不能用vim的方式，你怎么办</h4><ul>
+<li><p>问开发所需要日志的具体时间范围</p>
 </li>
-</ul>
-<ul>
-<li>还有第二种方法，一般这种情况可能是存在bug页面报错等情况，这时执行 tailf catalina.out &gt; 02.txt 让测试或开发还原报错过程，这样生成的日志更简短。</li>
+<li><p>通过sed取出日志并追加进新的文件，这样就能看到具体某时间段的日志sed -n ‘/2019-08-26 13:35:/,/2019-08-26 14:10:/p’ catalina.out &gt; 01.txt</p>
+</li>
+<li><p>还有第二种方法，一般这种情况可能是存在bug页面报错等情况，这时执行 tailf catalina.out &gt; 02.txt 让测试或开发还原报错过程，这样生成的日志更简短。</p>
+</li>
 </ul>
 <h4 id="5-用户不能访问你的网站，但是你测试发现是可以的，然后你怎么排查"><a href="#5-用户不能访问你的网站，但是你测试发现是可以的，然后你怎么排查" class="headerlink" title="5. 用户不能访问你的网站，但是你测试发现是可以的，然后你怎么排查"></a>5. 用户不能访问你的网站，但是你测试发现是可以的，然后你怎么排查</h4><p>这里回答的可能不是很好哦。</p>
 <ul>
@@ -120,16 +122,18 @@
 </ul>
 <h4 id="6-定时任务-11月的每天早上6点至12点执行一个脚本"><a href="#6-定时任务-11月的每天早上6点至12点执行一个脚本" class="headerlink" title="6. 定时任务 11月的每天早上6点至12点执行一个脚本"></a>6. 定时任务 11月的每天早上6点至12点执行一个脚本</h4><ul>
 <li><strong>00 6,8,10,12 * 11 * /bin/bash /home/root/test.sh &gt;/home/root/test.log &gt; 2&gt;&amp;1</strong></li>
-<li><strong>00 6-12/2 * 11 * /bin/bash /home/root/test.sh &gt;/home/root/test.log &gt; 2&gt;&amp;</strong><h4 id="7-binlog日志有那两种方式"><a href="#7-binlog日志有那两种方式" class="headerlink" title="7. binlog日志有那两种方式"></a>7. binlog日志有那两种方式</h4></li>
+<li><strong>00 6-12/2 * 11 * /bin/bash /home/root/test.sh &gt;/home/root/test.log &gt; 2&gt;&amp;</strong></li>
 </ul>
-<h4 id="8-查看服务器硬件使用信息的命令"><a href="#8-查看服务器硬件使用信息的命令" class="headerlink" title="8. 查看服务器硬件使用信息的命令"></a>8. 查看服务器硬件使用信息的命令</h4><ul>
+<h4 id="7-binlog日志有那两种方式"><a href="#7-binlog日志有那两种方式" class="headerlink" title="7. binlog日志有那两种方式"></a>7. binlog日志有那两种方式</h4><h4 id="8-查看服务器硬件使用信息的命令"><a href="#8-查看服务器硬件使用信息的命令" class="headerlink" title="8. 查看服务器硬件使用信息的命令"></a>8. 查看服务器硬件使用信息的命令</h4><ul>
 <li><strong>top</strong></li>
 <li><strong>uptime</strong></li>
 <li><strong>free -m</strong></li>
-<li><strong>df -h</strong><h4 id="9-keeplaviled的原理，用的什么协议"><a href="#9-keeplaviled的原理，用的什么协议" class="headerlink" title="9.  keeplaviled的原理，用的什么协议"></a>9.  keeplaviled的原理，用的什么协议</h4><blockquote>
+<li><strong>df -h</strong></li>
+</ul>
+<h4 id="9-keeplaviled的原理，用的什么协议"><a href="#9-keeplaviled的原理，用的什么协议" class="headerlink" title="9.  keeplaviled的原理，用的什么协议"></a>9.  keeplaviled的原理，用的什么协议</h4><blockquote>
 <p>keepalived是以VRRP协议为实现基础的，VRRP全称Virtual Router Redundancy Protocol，即虚拟路由冗余协议。<br>虚拟路由冗余协议，可以认为是实现路由器高可用的协议，即将N台提供相同功能的路由器组成一个路由器组，这个组里面有一个master和多个backup，master上面有一个对外提供服务的vip（该路由器所在局域网内其他机器的默认路由为该vip），master会发组播，当backup收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master。这样的话就可以保证路由器的高可用了。<br>keepalived主要有三个模块，分别是core、check和vrrp。core模块为keepalived的核心，负责主进程的启动、维护以及全局配置文件的加载和解析。check负责健康检查，包括常见的各种检查方式。vrrp模块是来实现VRRP协议的。</p>
 </blockquote>
-<h4 id="10-mysql备份test库-并还原test库-命令"><a href="#10-mysql备份test库-并还原test库-命令" class="headerlink" title="10. mysql备份test库 并还原test库 命令"></a>10. mysql备份test库 并还原test库 命令</h4></li>
+<h4 id="10-mysql备份test库-并还原test库-命令"><a href="#10-mysql备份test库-并还原test库-命令" class="headerlink" title="10. mysql备份test库 并还原test库 命令"></a>10. mysql备份test库 并还原test库 命令</h4><ul>
 <li><strong>mysqldump -u用户名 -p密码 test &gt; /home/root/test.sql</strong></li>
 <li><strong>mysql -u用户名 -p密码 &lt; /home/root/test.sql</strong></li>
 </ul>
@@ -149,9 +153,8 @@
 <li>–no-create-info：禁止生成创建数据库库表语句；</li>
 </ul>
 <h4 id="12-sed删除单数行"><a href="#12-sed删除单数行" class="headerlink" title="12.sed删除单数行"></a>12.sed删除单数行</h4><ul>
-<li><p><strong>sed -i ‘1~2d’ filename</strong></p>
-<p><strong>附送一个 awk的解决方法 awk ‘NR%2==0’ sed.txt</strong></p>
-</li>
+<li><strong>sed -i ‘1~2d’ filename</strong></li>
+<li><strong>附送一个 awk的解决方法 awk ‘NR%2==0’ sed.txt</strong></li>
 </ul>
 
       
