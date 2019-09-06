@@ -7,19 +7,19 @@
   
   <title>Lftp+Sftp传输大文件 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景介绍因为备份数据的不断扩大，需要把现网备份的数据（2T左右）传回到本地进行异地保存。但是2T太大了，需要进行压缩，这里采用了3G一个压缩包的方式。以下是压缩脚本">
+  <meta name="description" content="背景介绍因为备份数据的不断扩大，需要把现网备份的数据（2T左右）传回到本地进行异地保存。但是2T太大了，需要进行压缩，这里采用了3G一个压缩包的方式。以下是压缩脚本  生活需要冲，更需要缓存。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lftp+Sftp传输大文件">
 <meta property="og:url" content="http://yoursite.com/2019/08/23/lftp+sftp/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="背景介绍因为备份数据的不断扩大，需要把现网备份的数据（2T左右）传回到本地进行异地保存。但是2T太大了，需要进行压缩，这里采用了3G一个压缩包的方式。以下是压缩脚本">
+<meta property="og:description" content="背景介绍因为备份数据的不断扩大，需要把现网备份的数据（2T左右）传回到本地进行异地保存。但是2T太大了，需要进行压缩，这里采用了3G一个压缩包的方式。以下是压缩脚本  生活需要冲，更需要缓存。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2019/08/26/aSNUz9phrke3jc5.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/26/aGcRtfbJewkIu1j.png">
-<meta property="og:updated_time" content="2019-08-26T08:12:30.746Z">
+<meta property="og:updated_time" content="2019-09-06T07:35:05.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lftp+Sftp传输大文件">
-<meta name="twitter:description" content="背景介绍因为备份数据的不断扩大，需要把现网备份的数据（2T左右）传回到本地进行异地保存。但是2T太大了，需要进行压缩，这里采用了3G一个压缩包的方式。以下是压缩脚本">
+<meta name="twitter:description" content="背景介绍因为备份数据的不断扩大，需要把现网备份的数据（2T左右）传回到本地进行异地保存。但是2T太大了，需要进行压缩，这里采用了3G一个压缩包的方式。以下是压缩脚本  生活需要冲，更需要缓存。">
 <meta name="twitter:image" content="https://i.loli.net/2019/08/26/aSNUz9phrke3jc5.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -91,9 +91,12 @@
       
         <!--[TOC]-->
 <h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>因为备份数据的不断扩大，需要把现网备份的数据（2T左右）传回到本地进行异地保存。但是2T太大了，需要进行压缩，这里采用了3G一个压缩包的方式。以下是压缩脚本</p>
+<blockquote>
+<p>生活需要冲，更需要缓存。</p>
+</blockquote>
 <a id="more"></a>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此脚本是全量压缩mongodb备份的文件</span></span><br><span class="line">printf "开始mongodb备份压缩    $(date  +%Y%m%d_%A_%Z%T)\n"</span><br><span class="line">cd /data_master/backup/</span><br><span class="line">tar czf - picdb | split -b 3072m - picdb.tar.gz</span><br><span class="line">if [ $? != 0 ]</span><br><span class="line">    then</span><br><span class="line">printf "mongodb备份压缩失败    $(date  +%Y%m%d_%A_%Z%T)\n"</span><br><span class="line">    else</span><br><span class="line">printf "mongodb备份压缩完成    $(date  +%Y%m%d_%A_%Z%T)\n"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo "剩余容量: `df -h |awk -F '[ ]+' 'NR==7&#123;print $4&#125;'`"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span> 此脚本是全量压缩mongodb备份的文件</span><br><span class="line">printf "开始mongodb备份压缩    $(date  +%Y%m%d_%A_%Z%T)\n"</span><br><span class="line">cd /data_master/backup/</span><br><span class="line">tar czf - picdb | split -b 3072m - picdb.tar.gz</span><br><span class="line">if [ $? != 0 ]</span><br><span class="line">    then</span><br><span class="line">printf "mongodb备份压缩失败    $(date  +%Y%m%d_%A_%Z%T)\n"</span><br><span class="line">    else</span><br><span class="line">printf "mongodb备份压缩完成    $(date  +%Y%m%d_%A_%Z%T)\n"</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo "剩余容量: `df -h |awk -F '[ ]+' 'NR==7&#123;print $4&#125;'`"</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.loli.net/2019/08/26/aSNUz9phrke3jc5.png" alt="3G一个.png"><br>压缩完的结果就是上图一样，只是个数较多。<br>接下来的问题是：现网网络带宽有限，如何把这些压缩包传回到本地。这里采用的 早上6点至晚上10点，进行限速传（限速500KB/s），晚上10点后至早上6点采取不限速。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># SFTP传输脚本</span><br><span class="line"># IP地址</span><br><span class="line">IP=本地IP</span><br><span class="line"># PORT端口</span><br><span class="line">PORT=本地端口号</span><br><span class="line"># USER用户名</span><br><span class="line">USER=本地用户</span><br><span class="line"># PASSWD密码</span><br><span class="line">PASSWD=用户密码</span><br><span class="line">#压缩包所在目录</span><br><span class="line">CLIENTDIR=/data_master/backup/</span><br><span class="line">#SFTP服务器待下载目录</span><br><span class="line">SEVERDIR=/sftp/data_master/</span><br><span class="line"># 设置当前小时</span><br><span class="line"># xiaoshi=`date  +&quot;%Y-%m-%d %H:%M.%S&quot;|awk -F &quot;[ :]+&quot; &apos;&#123;print $2&#125;&apos;`</span><br><span class="line">#待下载文件名</span><br><span class="line"># FILE=</span><br><span class="line">while :</span><br><span class="line">do</span><br><span class="line">xiaoshi=`date  +&quot;%Y-%m-%d %H:%M.%S&quot;|awk -F &quot;[ :]+&quot; &apos;&#123;print $2&#125;&apos;`</span><br><span class="line">if [ $&#123;xiaoshi&#125; -ge 6 ] &amp;&amp; [ $&#123;xiaoshi&#125; -lt 22 ];</span><br><span class="line">    then</span><br><span class="line">        echo &quot;大于6时并小于22时，应该执行限速&quot;</span><br><span class="line">File=`head -1 /home/lsy/Sftp.txt`</span><br><span class="line"></span><br><span class="line">printf &quot;开始传输压缩备份    $(date  +%Y%m%d_%A_%Z%T)\n&quot; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">cd $&#123;CLIENTDIR&#125;</span><br><span class="line">lftp -u 用户,密码 sftp://本地IP地址:端口号 &lt;&lt; EOF</span><br><span class="line">cd $&#123;SEVERDIR&#125;</span><br><span class="line">lcd $&#123;CLIENTDIR&#125;</span><br><span class="line">set net:limit-rate 500000:500000</span><br><span class="line">reput $&#123;File&#125;</span><br><span class="line">by</span><br><span class="line">EOF</span><br><span class="line">if [ $? -eq 0 ]</span><br><span class="line">    then</span><br><span class="line">        echo &quot;传输成功。下面是文件名&quot; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">        echo $&#123;File&#125; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">        sleep 3</span><br><span class="line">    else</span><br><span class="line">        echo &quot;传输失败。&quot; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">        sleep 5</span><br><span class="line">        exit 2</span><br><span class="line">fi</span><br><span class="line">sed -i 1d /home/lsy/Sftp.txt</span><br><span class="line">printf &quot;传输完成    $(date  +%Y%m%d_%A_%Z%T)\n&quot; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">else</span><br><span class="line">    echo &quot;取消限速&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">File=`head -1 /home/lsy/Sftp.txt`</span><br><span class="line"></span><br><span class="line">printf &quot;开始传输压缩备份    $(date  +%Y%m%d_%A_%Z%T)\n&quot; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">cd $&#123;CLIENTDIR&#125;</span><br><span class="line">lftp -u 用户,密码 sftp://本地IP:端口 &lt;&lt; EOF</span><br><span class="line">cd $&#123;SEVERDIR&#125;</span><br><span class="line">lcd $&#123;CLIENTDIR&#125;</span><br><span class="line">reput $&#123;File&#125;</span><br><span class="line">by</span><br><span class="line">EOF</span><br><span class="line">if [ $? -eq 0 ]</span><br><span class="line">    then</span><br><span class="line">        echo &quot;传输成功。下面是文件名&quot; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">        echo $&#123;File&#125; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">        sleep 3</span><br><span class="line">    else</span><br><span class="line">        echo &quot;传输失败。&quot; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">        sleep 5</span><br><span class="line">        exit 2</span><br><span class="line">fi</span><br><span class="line">sed -i 1d /home/lsy/Sftp.txt</span><br><span class="line">printf &quot;传输完成    $(date  +%Y%m%d_%A_%Z%T)\n&quot; &gt;&gt;/home/lsy/sftp_file.log</span><br><span class="line">fi</span><br><span class="line">done </span><br><span class="line">curl -s &quot;钉钉机器人&quot; -H &quot;Content-Type: application/json&quot; -d &quot;&#123;&apos;msgtype&apos;: &apos;text&apos;, &apos;text&apos;: &#123;&apos;content&apos;: \&quot;$(date +%Y%m%d-%H%M%S)：$(cat /home/lsy/sftp_file.log)\&quot;&#125;, &apos;at&apos;: &#123;&apos;isAtAll&apos;: true&#125; &#125;&quot;</span><br></pre></td></tr></table></figure>
@@ -104,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/23/lftp+sftp/" data-id="cjzwebdni0004igtpggvj9r2r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/23/lftp+sftp/" data-id="ck07sq80k00035wtp7f7m8011" class="article-share-link">Share</a>
       
       
     </footer>
@@ -123,9 +126,9 @@
     </a>
   
   
-    <a href="/2019/08/15/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/09/16/Centos7-SystemOptimization/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">Centos7_SystemOptimization</div>
     </a>
   
 </nav>
@@ -149,7 +152,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -162,14 +165,6 @@
       <ul>
         
           <li>
-            <a href="/2019/08/29/test/">test</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/29/sudo/">sudo</a>
-          </li>
-        
-          <li>
             <a href="/2019/08/26/mszj/">mszj</a>
           </li>
         
@@ -178,7 +173,11 @@
           </li>
         
           <li>
-            <a href="/2019/08/15/hello-world/">Hello World</a>
+            <a href="/2017/09/16/Centos7-SystemOptimization/">Centos7_SystemOptimization</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/06/centos6-SystemOptimization/">Centos6_SystemOptimization</a>
           </li>
         
       </ul>

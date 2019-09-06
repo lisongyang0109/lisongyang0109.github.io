@@ -2,37 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2019/08/29/test/</loc>
-    
-    <lastmod>2019-08-29T09:31:04.243Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/08/29/sudo/</loc>
-    
-    <lastmod>2019-08-29T07:52:57.264Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2019/08/26/mszj/</loc>
     
-    <lastmod>2019-08-26T09:34:59.827Z</lastmod>
+    <lastmod>2019-09-06T08:27:01.768Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/08/15/hello-world/</loc>
+    <loc>http://yoursite.com/2017/09/16/Centos7-SystemOptimization/</loc>
     
-    <lastmod>2019-08-26T09:28:16.331Z</lastmod>
+    <lastmod>2019-09-06T08:25:45.800Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2019/08/23/lftp+sftp/</loc>
     
-    <lastmod>2019-08-26T08:12:30.746Z</lastmod>
+    <lastmod>2019-09-06T07:35:05.424Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/09/06/centos6-SystemOptimization/</loc>
+    
+    <lastmod>2019-09-06T06:35:13.706Z</lastmod>
     
   </url>
   

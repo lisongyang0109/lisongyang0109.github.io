@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Centos7_SystemOptimization | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Centos7系统优化说明：此优化适合在Centos7上。摘录于Jokerbj博客  人生在勤，不索何获。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos7_SystemOptimization">
+<meta property="og:url" content="http://yoursite.com/2017/09/16/Centos7-SystemOptimization/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Centos7系统优化说明：此优化适合在Centos7上。摘录于Jokerbj博客  人生在勤，不索何获。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-06T08:25:45.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos7_SystemOptimization">
+<meta name="twitter:description" content="Centos7系统优化说明：此优化适合在Centos7上。摘录于Jokerbj博客  人生在勤，不索何获。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Centos7-SystemOptimization" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/16/Centos7-SystemOptimization/" class="article-date">
+  <time datetime="2017-09-16T07:11:53.000Z" itemprop="datePublished">2017-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Centos7_SystemOptimization
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos7系统优化"><a href="#Centos7系统优化" class="headerlink" title="Centos7系统优化"></a>Centos7系统优化</h1><p><strong>说明：此优化适合在Centos7上。</strong><br><a href="https://www.cnblogs.com/jokerbj/p/9133093.html" target="_blank" rel="noopener">摘录于Jokerbj博客</a></p>
+<blockquote>
+<p>人生在勤，不索何获。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="优化条目"><a href="#优化条目" class="headerlink" title="优化条目"></a>优化条目</h3><ul>
+<li><strong>修改IP地址、网关、主机名、DNS等</strong></li>
+<li><strong>关闭selinux，清空iptables</strong></li>
+<li><strong>添加普通用户并进行sudo授权管理</strong></li>
+<li><strong>更新yum源及必要软件安装</strong></li>
+<li><strong>定时自动更新服务器时间</strong></li>
+<li><strong>精简开机自启动服务</strong></li>
+<li><strong>定时自动清理/var/spool/clientmqueue/目录垃圾文件，放置inode节点被占满</strong></li>
+<li><strong>变更默认的ssh服务端口，禁止root用户远程连接</strong></li>
+<li><strong>锁定关键文件系统</strong></li>
+<li><strong>调整文件描述符大小</strong></li>
+<li><strong>调整字符集，使其支持中文</strong></li>
+<li><strong>去除系统及内核版本登录前的屏幕显示</strong></li>
+<li><strong>禁止ping</strong></li>
+<li><strong>历史记录</strong></li>
+<li><strong>内核参数优化</strong></li>
+<li><strong>升级具有典型漏洞的软件版本</strong></li>
+</ul>
+<h3 id="1-修改ip地址、网关、主机名、DNS等"><a href="#1-修改ip地址、网关、主机名、DNS等" class="headerlink" title="1.修改ip地址、网关、主机名、DNS等"></a>1.修改ip地址、网关、主机名、DNS等</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vi /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">DEVICE=eth0         #网卡名字</span><br><span class="line">BOOTPROTO=static    #静态IP地址获取状态 如：DHCP表示自动获取IP地址</span><br><span class="line">IPADDR=192.168.1.113            #IP地址</span><br><span class="line">NETMASK=255.255.255.0           #子网掩码</span><br><span class="line">ONBOOT=yes#引导时是否激活</span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line">[root@localhost ~]# cat /etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPADDR=192.168.1.113</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line">[root@localhost ~]# vi /etc/sysconfig/network</span><br><span class="line">HOSTNAME=c64     #修改主机名，重启生效</span><br><span class="line">GATEWAY=192.168.1.1    #修改默认网关,如果上面eth0里面不配置网关的话，默认就使用这里的网关了。</span><br><span class="line">[root@localhost ~]# cat /etc/sysconfig/network</span><br><span class="line">HOSTNAME=c64</span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line">我们也可以用  hostnamec64  来临时修改主机名，重新登录生效</span><br><span class="line">修改DNS</span><br><span class="line">[root@localhost ~]# vi /etc/resolv.conf   #修改DNS信息</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">[root@localhost ~]# cat /etc/resolv.conf  #查看修改后的DNS信息</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">[root@localhost ~]# service network restart   #重启网卡，生效</span><br><span class="line">重启网卡，也可以用下面的命令</span><br><span class="line">[root@localhost ~]# /etc/init.d/network restart</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-关闭selinux，清空iptables"><a href="#2-关闭selinux，清空iptables" class="headerlink" title="2.关闭selinux，清空iptables"></a>2.关闭selinux，清空iptables</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">关闭selinux防火墙</span><br><span class="line">默认云服务器都是关着的</span><br><span class="line">cat /etc/selinux/config </span><br><span class="line">setenforce 0 设置不启动</span><br><span class="line">getenforce   查看</span><br></pre></td></tr></table></figure>
+
+<p><strong>清空iptables</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># iptables –F     #清理防火墙规则</span><br><span class="line"># iptables –L     #查看防火墙规则</span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination</span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination</span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination</span><br><span class="line">#/etc/init.d/iptables save   #保存防火墙配置信息</span><br></pre></td></tr></table></figure>
+
+<p><strong>针对centos7防火墙配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">修改防火墙</span><br><span class="line">CentOS切换为iptables防火墙</span><br><span class="line">firewall-cmd --state 查看防火墙状态</span><br><span class="line"></span><br><span class="line">切换到iptables首先应该关掉默认的firewalld，然后安装iptables服务。</span><br><span class="line">1、关闭firewall：</span><br><span class="line">systemctl stop firewalld.service </span><br><span class="line">systemctl disable firewalld.service #禁止firewall开机启动</span><br><span class="line"></span><br><span class="line">2、安装iptables防火墙</span><br><span class="line">yum install iptables-services #安装</span><br><span class="line">service iptables save</span><br><span class="line"></span><br><span class="line">3、编辑iptables防火墙配置</span><br><span class="line">vi /etc/sysconfig/iptables #编辑防火墙配置文件</span><br><span class="line">下边是一个完整的配置文件：</span><br><span class="line">在你运行完save中间插入下面的规则</span><br><span class="line">-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT</span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT</span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">:wq! #保存退出</span><br><span class="line">systemctl start iptables.service  #开启</span><br><span class="line">systemctl enable iptables.service #设置防火墙开机启动</span><br></pre></td></tr></table></figure>
+
+<p>附赠防火墙脚本，前提你已经切换至iptables</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">IPT=`which iptables`</span><br><span class="line">$IPT -F</span><br><span class="line">$IPT -X</span><br><span class="line">$IPT -P INPUT DROP</span><br><span class="line">$IPT -P FORWARD ACCEPT </span><br><span class="line">$IPT -P OUTPUT ACCEPT</span><br><span class="line">$IPT -N syn-flood</span><br><span class="line">##本地回环 内网允许任何</span><br><span class="line">$IPT -A INPUT -i lo -j ACCEPT</span><br><span class="line">$IPT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">$IPT -A INPUT -m state --state NEW -s 10.0.0.0/8 -j ACCEPT</span><br><span class="line"># ssh 端口开放 任何IP</span><br><span class="line">$IPT -A INPUT -m state --state NEW -p tcp --dport 22 -j ACCEPT</span><br><span class="line"># 根据需求填写相应的端口</span><br><span class="line">$IPT -A INPUT -p tcp -m multiport --dports 80,8087,89 -j ACCEPT</span><br><span class="line"># zabbix监控地址</span><br><span class="line">$IPT -A INPUT -p tcp -s zabbix.ip -m state --state NEW -m tcp --dport 10050 -j ACCEPT</span><br><span class="line"># ICMP 规则控制</span><br><span class="line">$IPT -A INPUT -p icmp -m limit --limit 100/sec --limit-burst 100 -j ACCEPT</span><br><span class="line">$IPT -A INPUT -p icmp -m limit --limit 1/s --limit-burst 10 -j ACCEPT</span><br><span class="line"># DOS防护</span><br><span class="line">$IPT -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j syn-flood</span><br><span class="line">$IPT -A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">$IPT -A syn-flood -p tcp -m limit --limit 3/sec --limit-burst 6 -j RETURN</span><br><span class="line">$IPT -A syn-flood -j REJECT --reject-with icmp-port-unreachable</span><br><span class="line"></span><br><span class="line">fwiptables.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-添加普通用户并运行sudo授权管理"><a href="#3-添加普通用户并运行sudo授权管理" class="headerlink" title="3.添加普通用户并运行sudo授权管理"></a>3.添加普通用户并运行sudo授权管理</h3><p>可以参考：<a href="https://www.cnblogs.com/jokerbj/p/9117384.html" target="_blank" rel="noopener">https://www.cnblogs.com/jokerbj/p/9117384.html</a></p>
+<h3 id="4-更新yum源及必要软件安装"><a href="#4-更新yum源及必要软件安装" class="headerlink" title="4.更新yum源及必要软件安装"></a>4.更新yum源及必要软件安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum源文件</span><br><span class="line">yum update   更新源文件</span><br><span class="line">yum clean all  清除缓存</span><br><span class="line">yum makecache  建立yum缓存</span><br><span class="line">CentOS-Base.repo 网络源文件</span><br><span class="line">推荐使用阿里云  </span><br><span class="line">如果发生问题很可能是域名解析问题</span><br><span class="line">vim /etc/resolv.conf</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">阿里</span><br><span class="line">nameserver 100.100.2.138</span><br><span class="line">nameserver 100.100.2.136</span><br><span class="line">options timeout:2 attempts:3 rotate single-request-reopen</span><br></pre></td></tr></table></figure>
+
+<p>接下来就要安装几个必要的软件了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install lrzsz ntpdate sysstat net-tools -y</span><br><span class="line">lrzsz 是上传下载的软件</span><br><span class="line">sysstat 是用来检测系统性能及效率的工具</span><br><span class="line">net-tools 没有ifconfig命令时候需要安装工具</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-定时自动更新服务器时间"><a href="#5-定时自动更新服务器时间" class="headerlink" title="5.定时自动更新服务器时间"></a>5.定时自动更新服务器时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">默认云服务器有同步的时间服务器</span><br><span class="line">修改时间 date</span><br><span class="line">硬件时间 hwclock --show</span><br><span class="line">同步公有时间服务器，可搭配任务计划，阿里云的时间服务器ntp.aliyun.com</span><br><span class="line">yum -y install ntp</span><br><span class="line">ntpdate asia.pool.ntp.org</span><br><span class="line">time.nist.gov</span><br><span class="line">time.nuri.net</span><br><span class="line">ntpdate asia.pool.ntp.org 或者 ntp.aliyun.com</span><br><span class="line">注意；如果出现ntpdate[24325]: the NTP socket is in use, exiting，需要systemctl stop ntpd.service停止，然后同步，之后再启动，阿里云服务器默认同步阿里云时间服务器</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-精简开机自启动服务"><a href="#6-精简开机自启动服务" class="headerlink" title="6.精简开机自启动服务"></a>6.精简开机自启动服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">修改启动服务</span><br><span class="line">systemctl 是管制服务的主要工具,它整合了chkconfig 与 service功能于一体。</span><br><span class="line">systemctl is-enabled iptables.service   #查询防火墙是否开机启动</span><br><span class="line">systemctl restart sshd #有可能不需要加service</span><br><span class="line">systemctl is-enabled servicename.service #查询服务是否开机启动</span><br><span class="line">systemctl enable *.service #开机运行服务</span><br><span class="line">systemctl disable *.service #取消开机运行</span><br><span class="line">systemctl start *.service #启动服务</span><br><span class="line">systemctl stop *.service #停止服务</span><br><span class="line">systemctl restart *.service #重启服务</span><br><span class="line">systemctl reload *.service #重新加载服务配置文件</span><br><span class="line">systemctl status *.service #查询服务运行状态</span><br><span class="line">systemctl --failed #显示启动失败的服务</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-定时自动清理-cat-var-spool-postfix-maildrop-目录垃圾文件，放置inode节点被占满"><a href="#7-定时自动清理-cat-var-spool-postfix-maildrop-目录垃圾文件，放置inode节点被占满" class="headerlink" title="7.定时自动清理 cat /var/spool/postfix/maildrop/目录垃圾文件，放置inode节点被占满"></a>7.定时自动清理 cat /var/spool/postfix/maildrop/目录垃圾文件，放置inode节点被占满</h3><p> centos7默认安装了postfix邮件服务，因此邮件位置 /var/spool/postfix/maildrop/会存在垃圾文件，如果长时间不清理，会导致inode数量不够用，从而无法存放文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir /server/scripts -p</span><br><span class="line">vi /server/scripts/spool_clean.sh</span><br><span class="line">#!/bin/sh</span><br><span class="line">find/var/spool/clientmqueue/-typef -mtime +30|xargs rm-f</span><br></pre></td></tr></table></figure>
+
+<p>然后将其加入到crontab定时任务中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;*/30 * * * * /bin/sh /server/scripts/spool_clean.sh &gt;/dev/null 2&gt;&amp;1&apos; &gt;&gt; /var/spool/cron/root</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-变更默认的ssh服务端口，禁止root用户远程连接"><a href="#8-变更默认的ssh服务端口，禁止root用户远程连接" class="headerlink" title="8.变更默认的ssh服务端口，禁止root用户远程连接"></a>8.变更默认的ssh服务端口，禁止root用户远程连接</h3><p>可参考<a href="https://www.cnblogs.com/jokerbj/p/9117384.html" target="_blank" rel="noopener">https://www.cnblogs.com/jokerbj/p/9117384.html</a><br>我们默认不会禁止root登录，端口酌情处理</p>
+<h3 id="9-锁定关键文件系统"><a href="#9-锁定关键文件系统" class="headerlink" title="9.锁定关键文件系统"></a>9.锁定关键文件系统</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">加锁，不可修改加锁文件</span><br><span class="line">[root@jokerpro ~]# chattr +i /etc/passwd</span><br><span class="line">[root@jokerpro ~]# lsattr /etc/passwd</span><br><span class="line">----i--------e-- /etc/passwd</span><br><span class="line">去锁，可以修改文件</span><br><span class="line">[root@jokerpro ~]# chattr -i /etc/passwd </span><br><span class="line">[root@jokerpro ~]# lsattr /etc/passwd   </span><br><span class="line">-------------e-- /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>使用chattr命令后，为了安全我们需要将其改名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /usr/bin/chattr /usr/bin/任意名称</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-调整文件描述符大小"><a href="#10-调整文件描述符大小" class="headerlink" title="10.调整文件描述符大小"></a>10.调整文件描述符大小</h3><p>　　文件描述符是由无符号整数表示的句柄，进程使用它来标识打开的文件。文件描述符与包括相关信息（文件的打开模式，文件的位置类型，文件的出始类型等）的文件对象相关联，这些信息被称作文件的上下文。文件描述符的有效范围是0到OPEN_MAX。<br>　　对于内核而言，所有打开的文件都是通过文件描述符引用的，当打开一个现有文件或创建一个新文件时，内核向进程返回一个文件描述符。当读或写一个文件时，使用open或create返回的文件描述符标识该文件，并将其作为参数传递给read或write。<br>可通过ulimit -a查看当前设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># ulimit -a</span><br><span class="line">core file size          (blocks, -c) 0</span><br><span class="line">data seg size           (kbytes, -d) unlimited</span><br><span class="line">scheduling priority             (-e) 0</span><br><span class="line">file size               (blocks, -f) unlimited</span><br><span class="line">pending signals                 (-i) 3895</span><br><span class="line">max locked memory       (kbytes, -l) 64</span><br><span class="line">max memory size         (kbytes, -m) unlimited</span><br><span class="line">open files                      (-n) 65535     # 文件描述符</span><br><span class="line">pipe size            (512 bytes, -p) 8</span><br><span class="line">POSIX message queues     (bytes, -q) 819200</span><br><span class="line">real-time priority              (-r) 0</span><br><span class="line">stack size              (kbytes, -s) 8192       # 堆栈文件</span><br><span class="line">cpu time               (seconds, -t) unlimited</span><br><span class="line">max user processes              (-u) 3895</span><br><span class="line">virtual memory          (kbytes, -v) unlimited</span><br><span class="line">file locks                      (-x) unlimited</span><br></pre></td></tr></table></figure>
+
+<p>文件描述符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">查看linux服务器文件描述符设置的情况</span><br><span class="line">ulimit -n 1024 默认打开的文件描述符就是1024</span><br><span class="line">对于高并发业务来讲，默认值肯定不够</span><br><span class="line">cat /etc/security/limits.conf 65535是最大支持的文件描述符</span><br><span class="line">root soft nofile 65535</span><br><span class="line">root hard nofile 65535</span><br><span class="line">可以使用下面一行来替代上面</span><br><span class="line">* - nofile 65535</span><br><span class="line">重启即可</span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，重新登录即可查看。<br><strong>提示：也可以把ulimit -SHn 65535命令临时生效，或者加入到/etc/rc.local，然后每次重启生效</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># cat &gt;&gt;/etc/rc.local&lt;&lt;EOF</span><br><span class="line"># open files</span><br><span class="line">ulimit -HSn 65535</span><br><span class="line"># stack size</span><br><span class="line">ulimit -s 65535</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-调整字符集，使其支持中文"><a href="#11-调整字符集，使其支持中文" class="headerlink" title="11.调整字符集，使其支持中文"></a>11.调整字符集，使其支持中文</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">修改字符编码，默认是LANG=en_US.UTF-8</span><br><span class="line">修改该文件之前，可以先查看已经安装的语言包：</span><br><span class="line">locale -a  可通过grep过滤查看是否有中文语言包</span><br><span class="line">如果没有语言包</span><br><span class="line">yum install kde-l10n-Chinese  </span><br><span class="line">yum reinstall glibc-common  </span><br><span class="line">安装完成后通过vi命令编辑配置文件</span><br><span class="line">vim /etc/locale.conf</span><br><span class="line">LANG=&quot;zh_CN.UTF-8&quot;</span><br><span class="line">source /etc/locale.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-去除系统及内核版本登录前的屏幕显示"><a href="#12-去除系统及内核版本登录前的屏幕显示" class="headerlink" title="12.去除系统及内核版本登录前的屏幕显示"></a>12.去除系统及内核版本登录前的屏幕显示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># cat /etc/redhat-release </span><br><span class="line">CentOS Linux release 7.4.1708 (Core) </span><br><span class="line"># cat /etc/issue</span><br><span class="line">\S</span><br><span class="line">Kernel \r on an \m</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-禁止linux系统被ping"><a href="#13-禁止linux系统被ping" class="headerlink" title="13.禁止linux系统被ping"></a>13.禁止linux系统被ping</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 开启禁止ping</span><br><span class="line">echo &quot;net.ipv4.icmp_echo_ignore_all=1&quot;  1&gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br><span class="line"># 关闭禁止ping</span><br><span class="line">首先要删除 /etc/sysctl.conf 里面net.ipv4.icmp_echo_ignore_all = 1 </span><br><span class="line">之后执行如下命令</span><br><span class="line">echo 0 1&gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</span><br><span class="line"># 后续就可以通过更改 cat  /proc/sys/net/ipv4/icmp_echo_ignore_all文件</span><br><span class="line">0 关闭 1 开启</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-历史记录"><a href="#14-历史记录" class="headerlink" title="14.历史记录"></a>14.历史记录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 以下都是临时生效，默认1000不需要更改</span><br><span class="line"># 设置的是闲置账号的超时时间</span><br><span class="line">export TMOUT=10 10秒后提示超时时间</span><br><span class="line"># 设置终端history显示条数</span><br><span class="line">export HISTSIZE=5 只显示最近5条信息</span><br><span class="line"># 上面的终端显示对应的是 cat ~/.bash_history </span><br><span class="line">export HISTFILESIZE=5 该文件只保存5条信息</span><br><span class="line"># 清空历史记录</span><br><span class="line">history -c</span><br><span class="line"># 指定条数删除</span><br><span class="line">history -d 历史记录条属</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/16/Centos7-SystemOptimization/" data-id="ck07sq80a00005wtpd2wh2q7m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/08/23/lftp+sftp/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Lftp+Sftp传输大文件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/06/centos6-SystemOptimization/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Centos6_SystemOptimization</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/26/mszj/">mszj</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/23/lftp+sftp/">Lftp+Sftp传输大文件</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/16/Centos7-SystemOptimization/">Centos7_SystemOptimization</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/06/centos6-SystemOptimization/">Centos6_SystemOptimization</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
