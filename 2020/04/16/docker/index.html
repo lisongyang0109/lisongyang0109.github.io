@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="阳阳的运维人生">
 <meta property="og:description" content="背景介绍因公司项目需求研究docker好长时间了，今天在这里稍微做一个整理，希望对大家能够有所帮助，正好自己也是个记录。  不管现在有多么艰辛，我们也要做个生活的舞者。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-16T09:44:30.189Z">
+<meta property="og:updated_time" content="2020-04-17T07:35:36.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker项目一 安装docker">
 <meta name="twitter:description" content="背景介绍因公司项目需求研究docker好长时间了，今天在这里稍微做一个整理，希望对大家能够有所帮助，正好自己也是个记录。  不管现在有多么艰辛，我们也要做个生活的舞者。">
@@ -158,7 +158,7 @@
 <p>使用脚本自动安装<br>在测试或开发环境中 Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，Ubuntu 系统上可以使用这套脚本安装，另外可以通过 –mirror 选项使用国内源进行安装：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">$ sudo sh get-docker.sh --mirror Aliyun</span><br><span class="line"># $ sudo sh get-docker.sh --mirror AzureChinaCloud</span><br><span class="line">执行这个命令后，脚本就会自动的将一切准备工作做好，并且把 Docker CE 的稳定(stable)版本安装在系统中。</span><br></pre></td></tr></table></figure>
 
-<p>####启动 Docker CE</p>
+<p>###启动 Docker CE</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl enable docker</span><br><span class="line">$ sudo systemctl start docker</span><br></pre></td></tr></table></figure>
 
 <p>建立 docker 用户组<br>默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。</p>
