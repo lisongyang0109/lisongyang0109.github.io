@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="阳阳的运维人生">
 <meta property="og:description" content="背景介绍因公司项目需求研究docker好长时间了，今天在这里稍微做一个整理，希望对大家能够有所帮助，正好自己也是个记录。  不管现在有多么艰辛，我们也要做个生活的舞者。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-17T07:35:36.936Z">
+<meta property="og:updated_time" content="2020-04-17T07:38:01.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker项目一 安装docker">
 <meta name="twitter:description" content="背景介绍因公司项目需求研究docker好长时间了，今天在这里稍微做一个整理，希望对大家能够有所帮助，正好自己也是个记录。  不管现在有多么艰辛，我们也要做个生活的舞者。">
@@ -141,7 +141,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Docker CE 支持以下版本的 Ubuntu 操作系统：</span><br><span class="line"></span><br><span class="line">Eoan 19.10</span><br><span class="line">Bionic 18.04 (LTS)</span><br><span class="line">Xenial 16.04 (LTS)</span><br></pre></td></tr></table></figure>
 
 <p>Docker CE 可以安装在 64 位的 x86 平台或 ARM 平台上。Ubuntu 发行版中，LTS（Long-Term-Support）长期支持版本，会获得 5 年的升级维护支持，这样的版本会更稳定，因此在生产环境中推荐使用 LTS 版本。</p>
-<p>####卸载旧版本<br>旧版本的 Docker 称为 docker 或者 docker-engine，使用以下命令卸载旧版本：</p>
+<h4 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h4><p>旧版本的 Docker 称为 docker 或者 docker-engine，使用以下命令卸载旧版本：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remove docker \</span><br><span class="line">               docker-engine \</span><br><span class="line">               docker.io</span><br></pre></td></tr></table></figure>
 
 <p>使用 APT 安装<br>由于 apt 源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。</p>
@@ -152,14 +152,13 @@
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 官方源</span><br><span class="line"># $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">然后，我们需要向 source.list 中添加 Docker 软件源</span><br><span class="line"></span><br><span class="line">$ sudo add-apt-repository \</span><br><span class="line">    &quot;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \</span><br><span class="line">    $(lsb_release -cs) \</span><br><span class="line">    stable&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 官方源</span><br><span class="line"># $ sudo add-apt-repository \</span><br><span class="line">#    &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span><br><span class="line">#    $(lsb_release -cs) \</span><br><span class="line">#    stable&quot;</span><br><span class="line">以上命令会添加稳定版本的 Docker CE APT 镜像源，如果需要测试或每日构建版本的 Docker CE 请将 stable 改为 test 或者 nightly。</span><br></pre></td></tr></table></figure>
 
-<p>####安装 Docker CE<br>更新 apt 软件包缓存，并安装 docker-ce：</p>
+<h4 id="安装-Docker-CE-1"><a href="#安装-Docker-CE-1" class="headerlink" title="安装 Docker CE"></a>安装 Docker CE</h4><p>更新 apt 软件包缓存，并安装 docker-ce：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure>
 
 <p>使用脚本自动安装<br>在测试或开发环境中 Docker 官方为了简化安装流程，提供了一套便捷的安装脚本，Ubuntu 系统上可以使用这套脚本安装，另外可以通过 –mirror 选项使用国内源进行安装：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">$ sudo sh get-docker.sh --mirror Aliyun</span><br><span class="line"># $ sudo sh get-docker.sh --mirror AzureChinaCloud</span><br><span class="line">执行这个命令后，脚本就会自动的将一切准备工作做好，并且把 Docker CE 的稳定(stable)版本安装在系统中。</span><br></pre></td></tr></table></figure>
 
-<p>###启动 Docker CE</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl enable docker</span><br><span class="line">$ sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+<h4 id="启动-Docker-CE"><a href="#启动-Docker-CE" class="headerlink" title="启动 Docker CE"></a>启动 Docker CE</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl enable docker</span><br><span class="line">$ sudo systemctl start docker</span><br></pre></td></tr></table></figure>
 
 <p>建立 docker 用户组<br>默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。</p>
 <p>建立 docker 组：</p>
